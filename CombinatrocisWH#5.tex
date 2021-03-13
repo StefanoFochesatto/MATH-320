@@ -1,0 +1,225 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+
+\linespread{1.1}
+
+%command for double parentheses
+\newcommand{\textmultiset}[2]{\bigl(\!{\binom{#1}{#2}}\!\bigr)}
+\newcommand{\displaymultiset}[2]{\left(\!{\binom{#1}{#2}}\!\right)}
+\newcommand\multiset[2]{\mathchoice{\displaymultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}}
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+\def\multiset#1#2{\left(\!\left({#1\atopwithdelims..#2}\right)\!\right)}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% header
+\lhead{\sc  Combinatorics: Homework 5}
+\chead{\sc Stefano Fochesatto } 
+\rhead{\today}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+
+\textbf{Directions:} For all numerical problems, a \emph{complete} solutions involves a calculation that ends in a numerical value and a rationale for that calculation.\\
+
+
+\begin{enumerate}
+%%%first problem
+\item (Problem 2.3.13) Give a combinatorial proof: If $n \geq 1$ and $k\geq 1,$ then $$S(n,k)=\sum_{j=1}^n {n-1 \choose j-1} s(n-j,k-1).$$
+
+\noindent\textbf{Proof:} The first summand describes partitions of $[n]$ such that there exists a block with only one element and then the rest of the blocks are counted by $S(n-1,k-1)$. Each iteration of the sum adds one more element to the block, ie we can guarantee that the second summand describes partitions of $[n]$ such that there exists a block with exactly two elements. This continues until the block contains enough elements such that the rest of $[n]$ is partitioned by $S(n-(n-k+1),k-1)$ which means that every remaining element is in its own block. So we can surmise that this sum partitions $S(n,k)$ by the size of an abritrary $k$ block.\\
+
+\vspace{.5in}
+
+\item (Problem 2.4.1) You have 40 pieces of candy to distribute among 10 children. Find the number of ways to do this in each of the following situations. Leave your answers in standard notation.\\
+\begin{enumerate}
+	\item The pieces of candy are different and each child gets at least one piece.\\
+	Since the candy is distinct and the children are distinct (barring any twins!!) we can calculate this the same way we would calculate the number of onto functions from $[40]\to [10]$. Consider $S(40,10)*10!$\\\\
+	
+	
+	
+	
+	
+	\item The pieces of candy are indistinguishable and each child can get any number of pieces.\\
+	Pieces are identical and children are distinct, with no restrictions on distribution. We can count this problem the same way we would count a problem that goes, how many 40-donut, donut orders of 10 flavors are there. Consider $\multiset{10}{40} = {49\choose40} = 2,054,455,634$\\\\
+	
+	
+	
+	
+	
+	\item The pieces of candy are different but you distribute them among 10 indistinguishable paper bags.\\
+	Since the candy is distinct, bags are identical and there is no restrictions on our distribution, we want to count the number of ways to partition $[40]$ but the maximum number of blocks is 10. Consider the sum of the first 10 Stirling Numbers such that $n=40$,\\
+\begin{equation*}
+\sum_{i = 1}^{10} S(40,i)
+\end{equation*}\\
+
+	
+	
+	
+	\item The pieces of candy are indistinguishable but you distribute them among 10 indistinguishable paper bags and each bag contains at least one piece.\\ 
+The pieces of candy are indistinguishable, the bags are indistinguishable and there must contain at-least one piece of candy in each bag. Consider the partitions of 40 into exactly 10 parts, P(40,10) = 3,590.\\\\
+	
+	
+	
+	
+	\item the pieces of candy are different and each child gets exactly one piece, so there are some pieces leftover.\\
+	Given that our candy is distinct, our children are distinct and each child can have exactly one piece of candy we can calculate the number of distributions using a k-list, consider $(40)_{10}$.\\\\
+	
+	
+	
+	
+	\item The pieces of candy are different and Frank receives four pieces.\\
+	First we want to choose the pieces of candy that Frank receives, ${40 \choose 4}$. Since 4 pieces of candy have already been distributed to 1 student and it is given that candy and children are distinct, each remaining 36 candies has 9 possible recipients, $9^{36}$. So ${40 \choose 4}*9^{36}$.
+\end{enumerate}
+
+\vspace{1in}
+
+
+
+
+
+
+
+\item (Problem 2.4.4)  Use type vectors to establish the bijection in Theorem 2.4.2.\\\\
+Theorem 2.4.2: If $n\geq1$ and $k\geq1$ then, 
+\begin{equation*}
+P(n,k) = \sum_{j = 1}^{k} P(n-k,j)
+\end{equation*}
+
+
+\noindent\textbf{Proof:} Consider $f: A \to B$ such that $A$ is defined by the set of possible partitions of an integer n into exactly k parts and $B$ is defined by the set of possible partitions of an integer (n-k) into at most k parts. Written as type vectors for $a \in A$ and $b \in B$,
+\begin{equation}
+a = [1^{p_1}  2^{p_2}...(n)^{p_{n}}],  \text{ such that $\sum_{i = 1}^{n}p_i = k$ and $\sum_{i = 1}^{n}p_i*i = n$ }
+\end{equation}
+\begin{equation}
+b = [1^{p_2}  2^{p_3}...(n-1)^{p_{n}}],  \text{ such that $\sum_{i = 2}^{n}p_i \leq k$ and $\sum_{i = 1}^{n-1}p_i*i = n-k$}
+\end{equation}
+Then $f: A \to B$ is defined by,
+\begin{equation*}
+f([1^{p_1} 2^{p_2}...(n)^{p_{n}}]) = [1^{p_2} 2^{p_3}...(n-1)^{p_n}]
+\end{equation*}\\\\
+
+
+
+
+\textbf{Injective:} Let $[1^{p_1}  2^{p_2}...(n)^{p_{n}}]$ and $[1^{q_1}  2^{q_2}...(n)^{q_{n}}]$ be partitions in $A$ such that, 
+\begin{equation*}
+f([1^{p_1} 2^{p_2}...(n)^{p_{n}}]) = f([1^{q_1} 2^{q_2}...(n)^{q_{n}}]).
+\end{equation*}
+Therefore by the definition of $f$ it is also true that,
+\begin{equation*}
+[1^{p_2}  2^{p_3}...(n-1)^{p_{n}}] = [1^{q_2}  2^{q_3}...(n-1)^{q_{n}}].
+\end{equation*}
+For these partitions to be equal it must follow that $p_i=q_i$ for all $i$, thus 
+\begin{equation*}
+[1^{p_1}  2^{p_2}...(n)^{p_{n}}] = [1^{q_1}  2^{q_2}...(n)^{q_{n}}].
+\end{equation*}\\\\
+
+
+\textbf{Surjective: } Consider $b = [1^{p_2}  2^{p_3}...(n-1)^{p_{n}}]$ in $B$. Note that this is a partition of the integer $(n-k)$ such that there is at most $k$ parts. We can create a partition  $a \in A$ by taking $b$, adding one to each part, and then appending parts size one until we have exactly $k$ parts. Consider $a = [1^{p_1} 2^{p_2}...(n)^{p_{n}}]$ such that ${p_1} = k-\sum_{i = 2}^{n}p_i$. 
+\begin{equation*}
+f([1^{p_1} 2^{p_2}...(n)^{p_{n}}]) = [1^{p_2} 2^{p_3}...(n-1)^{p_n}]
+\end{equation*}\\
+\vspace{1in}
+
+
+
+
+
+\item (Problem 2.4.7) Under what conditions on $n$ and $k$ is the statement $P(n,k)=P(n-1,k-1)$ true? Justify your answer.\\
+
+\noindent\textbf{Answer and Proof:} In order for $P(n,k)=P(n-1,k-1)$, for every partition in $P(n,k)$ there must exists at least one part that contains one. We want to use the PHP to define the bounds of $k$, suppose $k > \lfloor \frac{n}{2} \rfloor$ then since we have $n$ objects into at least $1+\lfloor \frac{n}{2} \rfloor$ recipients by the PHP there exists no two-to-one mappings. Therefore when $k \geq \lfloor \frac{n}{2} \rfloor$ there must exists at least one part that contains one. Thus $\lfloor \frac{n}{2} \rfloor < k \leq n$ and $n\geq 1$.\\ 
+
+Furthermore, we can take Theorem 2.4.1 from the book and check our answer.\\
+
+\noindent\textbf{Theorem 2.4.1: } If $n \geq 1$ and $k \geq 1$, then $P(n,k) = P(n-1,k-1) + P(n-k,k)$\\
+When $k \geq  \lceil \frac{n}{2} \rceil$ then 
+\begin{align}
+P(n,\lceil \frac{n}{2} \rceil) &= P(n-1,(\lceil \frac{n}{2} \rceil)-1) + P(n-\lceil \frac{n}{2} \rceil,\lceil \frac{n}{2} \rceil)\\
+ &= P(n-1,(\lceil \frac{n}{2} \rceil)-1) + P(\lfloor \frac{n}{2} \rfloor,\lceil \frac{n}{2} \rceil)
+\end{align}
+Since we can say that $P(\lfloor \frac{n}{2} \rfloor,\lceil \frac{n}{2} \rceil) = 0$ it must be true that $k \geq  \lceil \frac{n}{2} \rceil$.
+\vspace{1in}
+
+
+
+
+
+
+\item (Problem 2.4.8) Give a bijective proof of the following: The number of partitions of $n$ is equal to the number of partitions of $2n$ into $n$ parts. (There is a hint in the back of the book.)\\
+
+
+
+
+\noindent\textbf{Proof:} $P(n) = P(2n,n)$ 
+Consider $f: A \to B$ such that $A$ is defined by the set of possible partitions of an integer $n$ and $B$ is defined by the set of possible partitions of an integer $2n$ into exactly $n$ parts. Let $a \in A$ and $b \in B$, where
+
+\begin{equation*}
+a = [1^{p_1}  2^{p_2}...(n)^{p_{n}}],  \text{ such that $\sum_{i = 1}^{n}p_i \leq n$ and $\sum_{i = 1}^{n}p_i*i = n$ }
+\end{equation*}
+
+\begin{equation*}
+b = [1^{p_1}  2^{p_2}...(2n)^{p_{2n}}],  \text{ such that $\sum_{i = 1}^{2n}p_i = n$ and $\sum_{i = 1}^{2n}p_i*i = 2n$  }
+\end{equation*}
+
+Then we can define $f$ by taking $a$ and adding one to each part then appending parts size one until there are exactly $n$ parts therefore creating an $n$ size partition of $2n$ thus,
+
+\begin{equation*}
+f([1^{p_1}  2^{p_2}...(n)^{p_{n}}]) = [1^{p_0}  2^{p_1}...(n)^{p_{n-1}} (n+1)^{p_{n}}]  \text{ such that $p_0 = n-\sum_{i = 1}^{n}p_i$}
+\end{equation*}\\
+
+
+\noindent\textbf{Injective: } Consider $a,b \in A$ where $a = [1^{p_1}  2^{p_2}...(n)^{p_{n}}]$ and $b = [1^{q_1}  2^{q_2}...(n)^{q_{n}}]$ such that $f(a) = f(b)$. By $f$ we know that, 
+\begin{equation*}
+[1^{p_0}  2^{p_1}...(n)^{p_{n-1}} (n+1)^{p_{n}}] =[1^{q_0}  2^{q_1}...(n)^{q_{n-1}} (n+1)^{q_{n}}]
+\end{equation*}
+For these partitions to be equal it must follow that $p_i=q_i$ for all $i$, thus 
+\begin{equation*}
+ [1^{p_1}  2^{p_2}...(n)^{p_{n}}] = [1^{q_1}  2^{q_2}...(n)^{q_{n}}]
+\end{equation*}\\
+
+\noindent\textbf{Surjective: } Consider $b\in B$ where $b = [1^{p_1}  2^{p_2}...(2n)^{p_{2n}}]$. 
+
+
+This homework is kind of a mess, I still don't really quite understand how to do the surjective part of a type vector proof and I used the PHP like it was magic for one of the problems so yeah...
+
+- Stefano F.
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+\end{document}
+
+
+
+
+
+
+

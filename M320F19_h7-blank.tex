@@ -1,0 +1,210 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+\usepackage{mathtools}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+\linespread{1.1}
+
+%command for double parentheses
+\newcommand{\textmultiset}[2]{\bigl(\!{\binom{#1}{#2}}\!\bigr)}
+\newcommand{\displaymultiset}[2]{\left(\!{\binom{#1}{#2}}\!\right)}
+\newcommand\multiset[2]{\mathchoice{\displaymultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}}
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Combinatorics: Homework 7}
+\chead{\sc Stefano Fochesatto } 
+\rhead{\today}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+
+3.2 \#3,7,9;  3.3 \#2,3,4,7
+
+\begin{enumerate}
+%%%first problem
+\item (Problem 3.2.3) Prove: for $n\geq 2,$ $\displaystyle{\prod_{j=2}^n\left(1-\frac{1}{j^2} \right)=\frac{n+1}{2n}}.$\\
+
+\textbf{Proof:} (Induction) Consider the following statement $S_n$,
+\begin{equation*}
+S_n = \displaystyle{\prod_{j=2}^n\left(1-\frac{1}{j^2} \right)=\frac{n+1}{2n}} \text{  for all $n$, $n\geq 2$}.
+\end{equation*}
+\textbf{Base Case:} Let $n=2$, 
+\begin{align*}
+ \prod_{j=2}^2\left(1-\frac{1}{j^2} \right) &= 1- \frac{1}{2^2}\\
+ &=\frac{2^2}{2^2}-\frac{1}{2^2}\\
+ &=\frac{4-1}{2*2}\\
+ &=\frac{3}{2*2}\\
+ &=\frac{2+1}{2*2}.
+ \end{align*}
+From here it is clear that since $S_2$ can be reduced to a statement of the form $\frac{n+1}{2n}$ we can conclude that $S_2$ is true.\\
+
+\textbf{Induction:} Assume induction hypothesis $S_k$,
+\begin{equation*}
+S_k = \displaystyle{\prod_{j=2}^k\left(1-\frac{1}{j^2} \right)=\frac{k+1}{2k}} \text{  for all $k$, $k \geq 2$}.
+\end{equation*}
+We want to show that $S_{k+1}$ is true, 
+ \begin{equation*}
+S_{k+1} = \displaystyle{\prod_{j=2}^{k+1}\left(1-\frac{1}{j^2} \right)=\frac{(k+1)+1}{2(k+1)}}.
+\end{equation*}
+Through some algebra on the LHS of $S_{k+1}$,
+\begin{align*}
+\prod_{j=2}^{k+1}\left(1-\frac{1}{j^2} \right) &= \prod_{j=2}^{k}\left(1-\frac{1}{j^2} \right)*(1-\frac{1}{(k+1)^2}) \text{   pulling out last product}\\
+ &=\frac{k+1}{2k}*(1-\frac{1}{(k+1)^2}) \text{ substituting induction hypothesis}\\
+ &=\frac{k+1}{2k}*\frac{k^2+2k}{(k+1)^2} \text {   final steps are just algebra}\\
+  &=\frac{1}{2k}*\frac{k^2+2k}{(k+1)}\\
+   &=\frac{k^2+2k}{2k(k+1)}\\
+    &=\frac{k(k+2)}{2k(k+1)}\\
+     &=\frac{k+2}{2(k+1)}\\
+      &=\frac{(k+1)+1}{2(k+1)}.
+\end{align*}
+Therefore $S_{k+1}$ is true. Thus by induction we have proven that $S_n$ is true for all $n \geq 2$.\\\\
+
+
+
+
+
+\item (Problem 3.2.7) Give a combinatorial proof: for $n \geq 1$, $\displaystyle{\sum_{j=1}^nj!<(n+1)!}.$\\
+
+\textbf{Proof:} Consider that the RHS of the inequality is the number of permutations on the set $[n+1]$. We can see by expanding the sum on the LHS,
+\begin{equation*}
+\sum_{j=1}^nj! = 1!+2!+3!...n!
+\end{equation*}
+What we want so prove is that LHS partitions some subset $S$, of the number of permutations on the set $[n+1]$ such that $|S| < n+1$ for $n \geq 1$. \\\\
+
+
+
+
+
+
+\item (Problem 3.2.9)  For the recursive relation shown in (3.6) on page 99 we proved $L_n < 2^n$ for $n \geq 1.$\\
+	\begin{enumerate}
+	\item Prove the tighter inequality $L_n \leq 1.7^n.$ At what value should you start the induction?\\
+	
+\textbf{Proof:} (Strong Induction) Consider the following statement $S_n$,
+\begin{equation*}
+S_n=L_n \leq 1.7^n
+\end{equation*}
+Where $L_n = L_{n-1}+L_{n-2}$ and $L_1 = 1$ and $L_0 = 2$.\\\\
+\textbf{Base Case:}
+Let $n = 1$, then by definition $L_1 = 1$ and $1.7^1 = 1.7$ this it follow that $L_1 < 1.7^1$ so $S_1$ is true.
+Let $n = 2$, then by definition $L_2 = L_1 + L_0 = 3$ and $1.7^2 = 2.98$ thus it follows that $L_2 \approx 1.7^2$ so $S_2$ is true.\\\\
+
+\textbf{Induction:}  Since $S_2$ is an approximation it is best to start induction when $n=3$ because it is incorrect to assume the induction hypothesis for $n=2$. Assume Induction hypothesis $S_k$,
+\begin{equation}
+S_k=L_k \leq 1.7^k \text{ when $k \geq 3$}
+\end{equation}
+We want to show that $S_{k+1}$ is true,
+\begin{equation*}
+S_{k+1}=L_{k+1} \leq 1.7^{k+1} 
+\end{equation*}
+So looking at the LHS of the inequality,
+\begin{align*}
+L_{k+1} &= L_{k} + L_{k-1} \text{ by definition of $L_k$}\\
+&\leq 1.7^{k}+1.7^{k-1} \text{ substitution of induction hypothesis}\\
+&\leq 1.7^{k-1} (1.7+1)\\
+&\leq 1.7^{k-1} 2.7\\
+&\leq 1.7^{k-1} 2.89 \text{ because $2.7 < 2.89$}\\
+&\leq 1.7^{k-1} 1.7^{2} \text { because $1.7^2 = 2.89$}\\
+&\leq 1.7^{k+1}
+\end{align*}
+Therefore $S_{k+1}$ is true. Thus by induction we have proven that $S_n$ is true for all $n \geq 3$.\\\\
+
+
+
+
+
+
+	\item What is so special about the number 1.7? Adjust your work in part (a) to create the tightest bound that you can.\\
+		
+	\textbf{Proof:} Consider the following inequality from our induction step,
+	\begin{equation*}
+	x+1< x^2
+	\end{equation*}
+	This inequality illustrates exactly what is so special about the number 1.7, you can see that when we let $x = 1.7$ we get,
+	\begin{equation*}
+	2.7 < 2.89
+	\end{equation*}
+	So in order to create a tighter bound we just need to solve the inequality. When we solve the inequality we get that $x < 1.618$. So the inequality $L_n \leq x^n$ is true for all 	$x < 1.618$.\\
+	\end{enumerate}	
+	
+	
+	
+	
+	
+	
+
+\item (Problem 3.3.2) In each case, find a concise OGF for answer the question and also identify what coefficient you need.\\
+	\begin{enumerate}
+	\item How many ways are there to distribute 14 forks to 10 people so that each person receives one or two forks?\\
+\textbf{Answer:} Each person has either 1 or 2 forks so our generating function is $(x+x^2)^{10}$ and we want the coefficient of $x^{14}$. \\
+
+	\item You can buy soda either by the can, or in 6-, 12-, 24-, or 30-packs. How many ways are there to buy exactly $k$ cans of soda?\\
+\textbf{Answer:} Consider the following solutions to $k$, $x_1+x_2+x_3+x_4=k$ such that $x_1\in\{0,6,12,18,...\}$ $x_2\in\{0,12,24,...\}$ $x_3\in\{0,24,48,...\}$ $x_4\in\{0,30,60,...\}$. Therefore we are looking for the coefficient of $x^k$ of the OGF $(1+x^6+x^{12}+x^{18}+...)(1+x^{12}+x^{24}+...)(1+x^{24}+x^{48}+...)(1+x^{30}+x^{60}+...)$ The concise form of the OGF is $\frac{1}{(1-x^6)(1-x^{12})(1-x^{24})(1-x^{30})}$\\
+
+
+	\item  How many ways are there to put a total postage of 75 cents on an envelope using 3-, 5-, 10-, and 12-cent stamps?\\
+	\textbf{Answer:}	 Here we do the same thing as we did for the other problem, so the OGF is\\
+	 $\frac{1}{(1-x^3)(1-x^{5})(1-x^{10})(1-x^{12})}$ and we want to find the coefficient of $x^{75}$.\\
+	
+	
+	
+	
+	\item  At the movies you select 24 pieces of candy from among five different types. How many ways can you do this if you want at least two pieces of each type?\\
+	\textbf{Answer:}	  There are five different types of candy, and if there are two of each type of candy we can consider the solutions to the following equation, $x_1+x_2+x_3+x_4+x_5=24$ such that $x_i \in \{2,3,4,...\}$ thus, the concise OGF is $\frac{x^10}{(1-x)^5}$ and we want the coefficient of the $x^24$ term. \\
+	
+	
+	\item  How many solutions to $z_1+z_2+z_3=15$ are there, where the$z_i$ are integers satisfying $0 \leq z_i \leq 8$?\\
+	\textbf{Answer:}	 Consider the OGF $(1+x+x^2+x^3+..+x^8)^3$, where we want to find the coefficient of the $x^{15}$ term.\\
+	
+	
+	\item  How many ways are there to make change for a dollar using only pennies, nickels, dimes and quarters?\\
+	\textbf{Answer:}	 Consider the solutions to the equation $x_1+x_2+x_3+x_4=100$ such that  $x_1\in\{0,1,2,3,...\}$ $x_2\in\{0,5,10,...\}$ $x_3\in\{0,10,20,...\}$ $x_4\in\{0,25,50,...\}$. Then we get the concise generating function of the form  $\frac{1}{(1-x)(1-x^{5})(1-x^{10})(1-x^{25})}$ where we want the coefficient on the $x^{100}$ term.\\
+	
+	
+	
+\end{enumerate}
+\item (Problem 3.3.3) Find the coefficient of ...\\
+	\begin{enumerate}
+	\item $x^{60}$ in $\frac{1}{(1-x)^{23}}$\\
+	\textbf{Answer:}$\multiset{23}{60}$\\
+	\item $x^{k}$ in $\frac{1+x+x^4}{(1-x)^5}$\\
+	\textbf{Answer:} $\multiset{5}{k}$+$\multiset{5}{k-1}$+$\multiset{5}{k-4}$\\
+	\item $x^{3}$ in $\frac{x}{(1-x)^8}$\\
+	\textbf{Answer:} $\multiset{8}{2}$ \\
+	\item $x^{50}$ in $(x^9+x^{10}+x^{11}+ \cdots)^3$\\
+	\textbf{Answer:} Simplifying we get $x^{50}$ in $\frac{x^{27}}{(1-x)^3}$. Thus $\multiset{3}{23}$\\
+	\item $x^{k-1}$ in $\frac{1+x}{(1-2x)^5}$\\
+	\textbf{Answer:}  2^{k-1}$\multiset{5}{k-1}$+2^{k-2}$\multiset{5}{k-2}$\\
+	\end{enumerate}
+
+\item (Problem 3.3.4) A professor grades an exam that has 20 questions worth five points each. The professor awards zero, two , four, or five points on each problem. Find a concise OGF that can be used to determine the number of ways to obtain an exam score of $k$ points.\\
+
+\textbf{Answer:} The OGF that enumerates the scores is $(x+x^2+x^4+x^5)^{20}$ where the number of ways to get $k$ points is the coefficient on the $x^k$ term.\\
+
+
+\item (Problem 3.3.7) Find the number of solutions to $z_1+z_2+z_3+z_4=10$ where the $z_i$ are nonnegative integers such that $z_1 \leq 4,$ $z_2$ is odd, $z_3$ is prime, and $z_4 \in \{1,2,3,6,8\}.$\\
+
+\textbf{Answer:} Consider the OGF $(1+x+x^2+x^3+x^4)(x+x^3+x^5+x^7+x^9)(x^2+x^3+x^5+x^7)(x+x^2+x^3+x^6+x^8)$ then all we need to do is find the coefficient on the $x^{10}$ term. Thus there are 24 solutions.
+
+\end{enumerate}
+\end{document}

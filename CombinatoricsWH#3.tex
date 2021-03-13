@@ -1,0 +1,166 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+\linespread{1.1}
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+\usepackage{amssymb}
+\newcommand{\divides}{\mid}
+\newcommand{\notdivides}{\nmid}
+
+
+% header
+\lhead{\sc  Combinatorics: Homework 3}
+\chead{\sc Stefano Fochesatto } 
+\rhead{\today}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+
+\textbf{Directions:} For all numerical problems, a \emph{complete} solutions involves a calculation that ends in a numerical value and a rationale for that calculation.
+
+%%%first problem
+\noindent\textbf{Exercise 1.4.5: }Fill in the blank and then prove the statement: An equivalence relation on $A$ is a
+function $A \to A$ if and only if...\\
+\noindent \textbf{Solution:} "It is the identity relation on $A$"\\\\
+\noindent \textbf{(Contradiction) Proof:(Forwards)} Suppose an equivalence relation on $A$ is a function $f: A \to A$ then it is not the identity relation on $A$, therefore it must be the case that for $a,b\in A$, $f(a)=b$ and $f(b)=a$. If the relation is truly an equivalence relation it must respect transitivity and therefore, $f(a)=a$ must also be true. Thus a contradiction, $f$ is a function and not a function, therefore the equivalence relation on $A$  must be the identity relation.\\
+
+\noindent \textbf{(Direct) Proof:(Backwards)} Suppose a relation on $A$ is the identity relation. By definition the identity relation is one-to-one, ie. it relates every element in $A$ with itself and nothing more. Therefore the identity relation must be a function because it will never have an element in the domain mapping to more that one element in the codomain.\\ 
+\qed
+
+
+
+\vspace{1in}
+
+
+%%%second problem
+\noindent\textbf{Exercise 1.4.6: } Let $f:A􏰋\to B$. Define a relation $\equiv$ 􏰐on $A$ by $a_1\equiv 􏰐a_2 $ if and only if $f(a_1)=f(a_2)$. Give a quick proof that this is an equivalence relation. What are the equivalence classes? Explain intuitively.\\\\
+\noindent \textbf{Proof:}\\
+Show that $\equiv$ is symmetric. Suppose $a,b \in A$ such that $(a,b) \in \equiv$. Therefore by the definition of $\equiv$, $f(a)= f(b)$. Since that is true it must follow that $f(b)=f(a)$ and therefore $(b,a) \in \equiv$. Thus $\equiv$ is a symmetric relation. \\\\
+ Show that $\equiv$ is reflexive. Suppose $a \in A$ and we know that $f(a)=f(a)$, therefore it must follow that $(a,a) \in \equiv$. Thus $\equiv$ is a reflexive relation.\\\\
+ Show that $\equiv$ is transitive. Suppose $a,b,c \in A$ such that $(a,b),(b,c) \in \equiv$. By the definition of $\equiv$ we know that $f(a)=f(b)$ and $f(b)=f(c)$ is true. By substitution it must follow that  $f(a)=f(c)$ is true and therefore $(a,c) \in  \equiv$. Thus $\equiv$ is a transitive relation.\\\\
+There is an equivalence class for each element in the codomain.
+\qed
+
+\vspace{1in}
+
+
+
+%%%third problem
+\noindent\textbf{Exercise 1.4.7: } Solve the circular seating arrangements problem for four people, but with two seatings considered equivalent provided that each person has the same set of neighbors. (I.e., we don’t distinguish between left- and right-neighbors.)\\\\
+\noindent \textbf{Solution:} First let's count the total seating arrangements of 4 people, that is 4!. We know from the textbook example that for each permutation there are 3 other equivalent seating arrangements being counted, because we can rotate the seating,
+\begin{equation}
+(1,2,3,4)=(2,3,4,1)=(3,4,1,2)=(4,1,2,3)
+\end{equation}
+Since the new problem states, that the neighbors can be swapped and we have an equivalent seating arraignment, consider the following where 2 and four are swapped.
+\begin{equation}
+(1,4,3,2)=(4,3,2,1)=(3,2,1,4)=(2,1,4,3)
+\end{equation}
+For this problem seating arraignments in (1) and in (2) are equivalent therefore we want to the total seating arrangements by the number of equivalent seating arraignments. Thus the total number of seating arraignments is $\frac{4!}{8}=3$. Note, you could think $3 \choose 2$ because for each person there is 3 neighbors to choose from and only 2 neighbors to choose.
+\vspace{1in}
+
+%%%fourth problem
+\noindent\textbf{Exercise 1.4.10: }In how many ways can we split a group of 10 people into two groups of size 3 and one group of size 4?\\\\
+\noindent \textbf{Answer:} First we count the total number of permutations of 10 people, that is 10!. The we want to divide by the number of equivalent permutations. since we are dividing the 10 people into groups the n order doesn't matter so permutation where the people in the groups are in a different order are equivalent and permutations where the groups are in a different order are also equivalent.\\Therefore for each permutation of 10! there are,
+begin{equation}
+((3!)^{2})*4!*3! 
+\end{equation} 
+equivalent permutations, we can see that the $((3!)^{2})*4!$ functions to permute the people inside the groups, and then the $3!$ term serves to permute the order of the groups in general. Thus there are, 
+\begin{equation}
+\frac{10!}{((3!)^{2})*4!*3! }=700
+\end{equation}
+ways to split a group of 10 people into two groups of size 3 and one group of size 4.
+\vspace{1in}
+
+\noindent\textbf{Exercise 1.4.11:} How many partitions of [n]􏰊 into two blocks are there? How many partitions of [n] 􏰊into n-1 blocks are there?\\\\
+\noindent \textbf{Answer:} There are $2^{n}-2$ because because for each element there are 2 blocks to choose from and we subtract two because there are two options where all the elements go into one block.\\
+There are $n \choose 2$ partitions of [n] 􏰊into n-1 blocks because by pigeon hole principal there is only one block with two element so the number of partitions coincides with the number of ways to fill that specific block.
+\vspace{1in}
+
+
+%%%fifth problem
+
+\noindent\textbf{Exercise 1.4.15: } How many different necklaces can we make from n beads of different colors? Consider two necklaces the same if (like in a circular arrangement) one can be obtained from the other via rotation or if (unlike in a circular arrangement) one can be obtained from the other via flipping the necklace over.\\\\
+
+\noindent \textbf{Answer:} First lets count the total number of  necklace permutations, thats $n!$. Now we want to count how many equivalent necklaces are there for each permutations consider $n*2$ The $n$ term is by rotation and the $2$ term is by symmetric. Thus,
+\begin{equation}
+\frac{n!}{n*2}
+\end{equation}
+\vspace{1in}
+
+%%%sixth problem
+\noindent\textbf{Exercise 1.5.1: } A bag contains 97 pennies, 56 nickels,410 dimes,102 quarters, and three half-dollars. You reach in and grab some coins. What is the fewest number of coins you must grab in order to guarantee that you have two coins of the same value in your hand?\\\\
+\noindent \textbf{Answer:}Since there are 5 types of coins, If we grab 6 coins by the pigeon hole principle there must be two coins of the same value.\\
+\vspace{1in}
+
+%%%7th problem
+\noindent\textbf{Exercise 1.5.2: }Let $n$ be odd and suppose $(x_1,x_2,..., x_n)$ is any permutation of [n]. Prove that the product $(x_1-1)(x_2-2)...(x_n-n)$ is even. Is the result necessarily true if $n$ is even? Give a proof or counterexample.\\\\
+\noindent \textbf{Answer:} }Suppose $n$ be odd and suppose $(x_1,x_2,..., x_n)$ is any permutation of [n] and the set 
+\begin{equation}
+S=\{(x_1-1),(x_2-2),...,(x_n-n)\}
+\end{equation}
+We know that because $n$ is odd there must be $\frac{n-1}{2}$ even numbers and $\frac{n+1}{2}$ odd numbers. By translation there must also be $\frac{n-1}{2}$ elements in $S$ that we know for certain have an even number in the sum operation, and $\frac{n+1}{2}$  that have an odd number in the sum operation. Since there are $\frac{n+1}{2}$ odd numbers in $n$ and $\frac{n-1}{2}$ elements in $S$ that we know for certain have an even number in the sum operation by the PHP there must exist a sum in $S$, $(b-a)$ such that $b$ and $a$ are both odd, therefore the product of $S$ must be even.\\\\
+If $n$ is even there exists permutation of $n$ such that no odds are paired together therefore the product of elements in $S$ would be odd.
+\vspace{1in}
+
+%%% 8th problem
+\noindent\textbf{Exercise 1.5.4: } Let $n > 1$, and let $S$ be an (n+1) subset of [2n]. Prove that there exist two numbers in $S$ such that one divides the other.\\\\
+\noindent \textbf{Proof:} First we want to partition [2n] into $n$ subsets such that every pair of elements $a,b$ in the partition can be written as $a\mid b$ or $b \mid a$ so that we can use the PHP to say that there exists 2 elements in our subset length $n+1$ such that one divides the other.  let's first assign every partition an odd number, i.e $S_i=\{2i-1\}$ such that $1<i\leq n$ because there are $n$ odd numbers in the set [2n]. Then we can assign the even numbers such that, 
+\begin{equation}
+ S_i=\{(2i-1),2^{1}(2i-1),2^{2}(2i-1),...,2^{a}(2i-1)\}. 
+\end{equation} 
+Thus $S_i$ contains the odd number $(2i-1)$ and any number that can be
+obtained by multiplying $2i-1$ by a power of 2 such that the entire set [2n] is partitioned. For an example, consider $n=4$ then the partitions would be as follows,
+\begin{align}
+S_1&=\{1,2,4,8\}\\
+S_2&=\{3,6\}\\
+S_3&=\{5\}\\
+S_4&=\{7\}
+\end{align}
+Note that $S_1$ is equivalent to,
+\begin{equation}
+ S_1=\{(2(1)-1),2^{1}(2(1)-1),2^{2}(2(1)-1),2^{3}(2(1)-1)\}. 
+\end{equation} 
+Therefore we have partitioned $S$ into $n$ subsets such that every pair of elements $a,b$ in the subsets can be written as $a\mid b$ or $b \mid a$. Thus by the PHP there must exist 2 elements in our subset length $n+1$ such that one divides the other.
+\qed
+\vspace{1in}
+
+%%% 9th problem
+\noindent\textbf{Exercise 1.5.8.a: } For $m,n \leq 1$, if $S$ is a sequence of $mn+1$ distinct real numbers, then $S$ contains either an increasing subsequence of length $m+1$ or a decreasing subsequence of length $n+1$.\\\\
+\noindent \textbf{Proof:} Suppose that that for some $a\in S$ such that $LIS(a)\geq m+1$ then we have proven there exists an increasing sub sequence length $m+1$. In the case that $LIS(a) < m+1$, we recall that the $LIS(x)$ function maps the element from the $mn+1$ sequence to the set [m] thus by the pigeon hole principle,
+\begin{equation}
+\Bigl\lceil \frac{mn+1}{m} \Bigr\rceil =\Bigl\lceil n + \frac{1}{m} \Bigr\rceil = n+1
+\end{equation}
+Therefore there are $n+1$ elements in $S$ with the same $LIS{x}$ value and therefore there exists a decreasing subsequence length $n+1$.\\
+\qed\\
+
+\noindent\textbf{Exercise 1.5.8.b: } Prove that this result is best possible by showing that the result doesn’t necessarily hold when $mn+1$ is replaced by $mn$.\\
+\noindent \textbf{Proof:} In the case that out subsequence is length $mn$ then the longest decreasing subsequence that we can guarantee is calculated by the pigeon hole principle,
+\begin{equation}
+\Bigl\lceil \frac{mn}{m} \Bigr\rceil = n
+\end{equation}
+Thus the longest decreasing subsequence we can guarantee is length $n$.\\
+\qed
+
+
+
+
+
+ \vspace{1in}
+
+\end{document}

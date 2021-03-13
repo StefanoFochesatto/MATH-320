@@ -1,0 +1,164 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\linespread{1.1}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+
+
+
+
+
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Combinatorics: Homework 1}
+\chead{\sc Stefano Fochesatto } 
+\rhead{\today}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+
+%%%first problem
+\noindent\textbf{Exercise 1.1.1: } How many different tickets are possible in each of the following lotteries? And which lottery offers the best change of winning?
+\begin{enumerate}[(a)]
+\item You pick six numbers from 1 to 16, a number can be picked more than once, and order doesn't matter.\\
+
+\noindent \textbf{Answer: }
+Since order doesn't matter and repetition is allowed we want to use the multi-set formula. Visually we can think of the donut and bin example, where the bins are labeled 1-16 and the donuts are the digits in a lottery ticket.
+\begin{equation}
+\multiset{16}{6}= 54264
+\end{equation}
+\vspace{1in}
+
+\item You pick five different numbers from 1 to 25 and order doesn't matter.\\
+
+\noindent \textbf{Answer: }
+Since the Numbers are "different" we know that repetition is not allowed and it is stated that order doesn't matter we want to use the combination formula.
+\begin{equation}
+{15\choose5} = 53130
+\end{equation}
+\vspace{1in}
+
+\item You pick four different numbers from 1 to 18 and the order in which you specify them matters. \\
+
+\noindent \textbf{Answer: }
+Since order matters and repetitions are not allowed we want to do a 4-list,
+\begin{equation}
+18*17*16*15=73440
+\end{equation}
+\vspace{1in}
+
+\end{enumerate}
+
+%%%second problem
+\noindent\textbf{Exercise 1.1.2: } You flip a coin 20 times and record the ordered sequence of heads and tails.
+\begin{enumerate}[(a)]
+\item How many sequences are there in which you get heads on (at least) flip \#1, \#4, \#7 and \#13?\\
+
+\noindent \textbf{Answer:}
+There is a total of 20 flips, we know that at least 4 for those flips have to be heads. By the multiplication principle we know that the total number of sequences in which at least 4 of those flips have to be heads is $2^16$. Since we are using the multiplication principle, WHEN the pre determined ”heads” flips happen doesn’t matter, only the total number of predetermined ”Heads” Flips matters. So there are 65536 total sequences.
+\vspace{1in}
+
+\item How many sequences have the same number of heads and tails?\\
+
+\noindent \textbf{Answer:}
+How many sequences have the same number of heads and tails?
+To count the number of sequences that have the same number of heads and tails we count the number of ways we can choose 10 flips from 20 flips. So,
+\begin{equation}
+{20\choose10} = 184756
+\end{equation}
+
+
+
+
+\vspace{1in}
+\end{enumerate}
+
+%%%third problem
+\noindent\textbf{Exercise 1.1.9: } How many subsets of $[20]$...\\
+\begin{enumerate}[(a)]
+\item have smallest element 4 and largest element 15?\\
+
+\noindent \textbf{Answer:}
+There are two options, whether to allow an element in the subset or not. In our case the elements in question are 4 through 15, so 12 elements total. So to count this we want to use the multiplication principle with 
+\begin{equation}
+2^12=4096
+\end{equation}
+
+\vspace{1in}
+
+\item contain no even numbers?\\
+
+\noindent \textbf{Answer:}
+The same principle applies as before,
+
+\begin{equation}
+2^10=1024
+\end{equation}
+
+\vspace{1in}
+
+\item have size 10 and don't contain any number larger than 17?\\
+
+\begin{equation}
+17\choose10= 19448
+
+\end{equation}
+
+\vspace{1in}
+
+
+
+
+
+\noindent \textbf{Answer:}
+Here we need to employ a different strategy. Since the since of the the subsets will always be 10 elements in each subset and since we are counting sets repetitions don't matter we want to use the combination formula.
+\begin{equation}
+{17\choose10} = 19448
+\end{equation}
+
+
+
+
+\vspace{1in}
+\end{enumerate}
+
+%%%fourth problem
+\noindent\textbf{Exercise 1.1.14: } How many arithmetic problems of the following form are possible? You must use each of the digits 1 through 9, they must appear in numerical order from left to right and you can use any combination of the $+$ and $\times$ symbols you like, as long as the resulting expression makes mathematical sense. For example, $1234+5 \times 6 \times 78+8$ and $123456+789$ and $123456789$ are three possibilities, but $1 \times \times 234567+89$ is not.\\
+
+\noindent \textbf{Answer:}
+Since there are 9 digits, there are only 8 spaces for symbols that result in an expression that makes sense. For each space there are 3 options, "+","*" and no symbol. Therefore the total number of possible expressions is $3^8$ By the multiplication principle.
+\begin{equation}
+3^8 = 6561
+\end{equation}
+
+
+\vspace{1in}
+
+%%%fifth problem
+\noindent\textbf{Exercise 1.1.17: } Find the number of 3-lists of the form $(x_1,x_2,x_3)$ where each $x_i$ is a nonnegative integer and $x_1+x_2+x_3 =10.$\\
+
+\noindent \textbf{Answer:}
+Consider the multi-set example where there are donuts in bins. In our case there are 3 bins, the variables $x_1$,$x_2$ and $x_3$. There are 10 donuts, and the number of donuts in the bin codifies the value of the variable. 
+\begin{equation}
+\multiset{3}{10}=66
+\end{equation}
+
+
+\vspace{1in}\end{document}

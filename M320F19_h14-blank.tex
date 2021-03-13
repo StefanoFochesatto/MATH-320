@@ -1,0 +1,85 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz, calc}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+%% The next line says how the "vertex" style of nodes should look: drawn as small circles.
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=6pt]
+%%
+%% Next, we make a \vertex command as a shorthand in place of \node[vertex} to get that style.
+\newcommand{\vertex}{\node[vertex]}
+
+\linespread{1.1}
+
+%command for double parentheses
+\newcommand{\textmultiset}[2]{\bigl(\!{\binom{#1}{#2}}\!\bigr)}
+\newcommand{\displaymultiset}[2]{\left(\!{\binom{#1}{#2}}\!\right)}
+\newcommand\multiset[2]{\mathchoice{\displaymultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}}
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Combinatorics: Homework 14}
+\chead{\sc Stefano Fochesatto } 
+\rhead{\today}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+ 
+\begin{enumerate}
+%%%first problem
+\item (Problem 7.2.8) Consider a symmetric $(v,k,\lambda)$ BIBD. Show that the residual design of its complementary design has the same parameters as the complementary design of its derived design.\\
+
+\textbf{Answer:} Suppose we have a symmetric BIBD with parameters $(v,k,\lambda)$. We want to show that the residual design of the complementary design is the same as the complementary design of the derived design. First let's find the parameters for the residual design of the complementary design. We know how to build each of these designs (residual, complementary, and derived) from the theorems in the textbook and our work in class. \\\\
+\begin{equation*}
+\begin{bmatrix}
+Original &Residual &Complementary& Derived\\\\
+(b,v,r,k,\lambda)&((b-1),(v-k),(r),(k-\lambda),\lambda)&(b,v(b-r),(v-k),(b-2r+\lambda))&((b-1),k,(r-1),\lambda,(\lambda-1))\\\\
+(v,v,k,k,\lambda)&((v-1),(v-k)(k)(k-\lambda),\lambda)&(v,v,(v-k),(v-k)(v-2k+\lambda))&((v-1),k,(k-1),\lambda,(\lambda-1))
+\end{bmatrix}
+\end{equation*}\\\\
+The above table provides functions for building each design, the top row is when the input is a non symmetric design, the bottom row is for symmetric designs.\\\\
+From the table we can see that if we are looking for the residual design of the complementary design, we can just take bottom entry for the complementary design and apply the bottom entry of the residual,\\
+\begin{align*}
+Residual(complement) &=  (v-1),(v-(v-k))(v-k)((v-k)-(v-2k+\lambda)),(v-2k+\lambda)\\
+&= (v-1),k,(v-k),(k-\lambda),(v-2k+\lambda)
+\end{align*}\\
+Now we do the same thing when finding the parameters of the complementary design of the derived design. First consider $Compliment(derived)$. Note how the derived design is not symmetric, therefore when we perform this operation we need to use the top row of the matrix,\\
+\begin{align*}
+Compliment(derived) &=  (b-1), k((b-1)-(r-1)),(k-\lambda),((b-1)-2(r-1)+(\lambda-1))\\
+&=(b-1),k,(b-r),(k-\lambda),(b-2r+\lambda)\\
+&= (v-1),k,(v-k),(k-\lambda),(v-2k+\lambda)    \text{ Substitution by definition of symmetric design.}    
+\end{align*}\\
+Thus we have shown the that the residual design of the complementary design is the same as the complementary design of the derived design when the original design is symmetric.
+\vspace{1in}
+
+
+\item (Problem 7.2.9) Let $\mathcal{D}$ be a design with incidence matrix $A$. Define the \textbf{dual design of $\mathcal{D}$} to be that design with incidence matrix $A^T.$. We use $\mathcal{D}^T$ to denote the dual design. \\
+Assume the $\mathcal{D}$ is a $(b,v,r,k,\lambda)$ BIBD. Find a sufficient condition of $\mathcal{D}^T$ to be a BIBD and prove that you are correct. Also, find the parameters of $\mathcal{D}^T.$\\
+
+\textbf{Answer:} Consider the incidence matrix $A$, we can find the parameters of $\mathcal{D}^T$ by looking looking at $A^T$. We know that for any matrix the number of columns and rows swap when we look at the transpose, therefore for$\mathcal{D}^T$ we will have parameters (v,b,?,?,?). Now consider that we are given a $\mathcal{D}$ that is $r-regular$ and $k-uniform$ we can see that through the incidence matrix $A.$ If for each column in $A$ there is the same number of ones and if for each row in $A$ there is the same number of ones then we know thats $\mathcal{D}$ is $r-regular$ and $k-uniform$. By the definition of the transpose of a matrix, we know that the columns become the rows and the rows become the columns so we can say that $\mathcal{D}^T$ is $k-regular$ and $r-uniform$  and therefore \mathcal{D}^T$ we will have parameters (v,b,k,r,?). Now we need to find out if $\mathcal{D}^T$ is $\lambda-balanced$. The way we interpret $\lambda$ using an incidence matrix is by looking at pairwise rows and seeing that they all have the same number of ones in common. Since $\mathcal{D}^T$ is defined by the matrix $A^T$ we need to find this property of common pairwise ones in the columns of $A$, this property is defined as being $l - linked$. Therefore the parameters for $\mathcal{D}^T$ are (v,b,k,r,l). In order for $\mathcal{D}^T$ to be a BIBD, $\mathcal{D}$ must have $r<b$ and be $l-linked$.
+
+
+
+
+
+
+
+\end{enumerate}
+\end{document}

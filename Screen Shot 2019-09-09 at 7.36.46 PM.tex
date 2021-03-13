@@ -1,0 +1,260 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+\linespread{1.1}
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Combinatorics: Homework 2}
+\chead{\sc Stefano Fochesatto } 
+\rhead{\today}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+
+\textbf{Directions:} For all numerical problems, a \emph{complete} solutions involves a calculation that ends in a numerical value and a rationale for that calculation.
+
+%%%first problem
+\noindent\textbf{Exercise 1.2.1.b: }Jeopardy! The following is an answer to a counting question. Your job is to write a question  for it.
+\begin{quote} $n^n-n!$ \end{quote}
+\noindent \textbf{Solution:} Since this calculation describes counting something where order matters, repetitions are allowed and there is always at least one repetition, all we have to do is construct a problem where the aforementioned criteria is met. Consider an n-length list of n possible letters where there is at least one repetition.\\\\
+
+
+%%%second problem
+\noindent\textbf{Exercise 1.2.2: } How many different outcomes are there in a best-of-nine series between two teams A and B? Generalize to a best-of-$n$ series where $n$ is odd.\\
+\begin{equation}
+2*( {5 \choose 5} +{6 \choose 5}+{7 \choose 5}+{8 \choose 5}+{9 \choose 5} )=420
+\end{equation}
+We know that there will be at least 5 games and at most 9 games. In each scenario there will always be exactly five games won by the winning team. So we use the combination formula to count the number of ways a team can win in each scenario, then we multiply the whole thing by 2 because there are two teams.\\\\
+The formula generalized,
+\begin{equation}
+2*( {n \choose \frac{n+1}{2}} +{n-1 \choose \frac{n+1}{2}}+{n-2 \choose \frac{n+1}{2}}+...+{\frac{n+1+1}{2} \choose \frac{n+1}{2}}+{\frac{n+1}{2} \choose \frac{n+1}{2}} )\\
+\end{equation}
+\begin{equation}
+2*\sum_{i=\frac{n+1}{2}}^{n}{i \choose \frac{n+1}{2}}
+\end{equation}
+
+
+
+
+%%%third problem
+\noindent\textbf{Exercise 1.2.4: } A group consists of 12 men and 8 women. How many ways are there to...\\
+\begin{enumerate}[(a)]
+\item form a committee of size 5?\\
+
+\noindent \textbf{Answer:}
+Since there are 20 people total we simply do 20 choose 5.
+\begin{equation}
+{{20} \choose {5}}=15504
+\end{equation}
+\vspace{1in}
+
+\item form a committee of size 5 containing two men and three women?\\
+
+\noindent \textbf{Answer:}
+Now we want to count the combinations of men and women and then multiply them, 
+\begin{equation}
+{{12} \choose {2}}*{{8} \choose {3}}=3696
+\end{equation}
+
+\vspace{1in}
+
+\item form a committee of size 6 containing at least three women?\\
+
+\noindent \textbf{Answer:}
+To count "at least" statements its always helpful to count up what we want and up what we don't want just to double check.
+The first calculation utilizes counting the compliment and then subtracting it from the total.
+\begin{equation}
+{{20} \choose {6}}-({{8} \choose {2}}{{12} \choose {4}}+{{8} \choose {1}}{{12} \choose {5}}+{{8} \choose {0}}{{12} \choose {6}})=17640
+\end{equation}
+The second counts up each committee that we want, first those with 3 women and then 4 and so on.
+\begin{equation}
+{{8} \choose {3}}{{12} \choose {3}}+{{8} \choose {4}}{{12} \choose {2}}+{{8} \choose {5}}{{12} \choose {1}}+{{8} \choose {6}}{{12} \choose {0}}=17640
+\end{equation}
+Since we got the same number for each approach we can be certain that the calculation is correct.
+\vspace{1in}
+
+\item form a committee of size 10 containing at least four women?\\
+
+
+\noindent \textbf{Answer:}
+Here we want to do the same thing as before, first lets count the compliment,
+\begin{equation}
+{{20} \choose {10}}-({{8} \choose {3}}{{12} \choose {7}}+{{8} \choose {2}}{{12} \choose {8}}+{{8} \choose {1}}{{12} \choose {9}}+{{8} \choose {0}}{{12} \choose {10}})=124718
+\end{equation}
+Then lets just count up each committee that meets the criteria,
+\begin{equation}
+{{8} \choose {4}}{{12} \choose {6}}+{{8} \choose {5}}{{12} \choose {5}}+{{8} \choose {6}}{{12} \choose {4}}+{{8} \choose {7}}{{12} \choose {3}}+{{8} \choose {8}}{{12} \choose {2}}=124718
+\end{equation}
+
+
+\vspace{1in}
+
+\item form an all-male committee of any size?\\
+
+
+\noindent \textbf{Answer:}
+To form an all male committee of any size we want to sum the total number of possible committees for each size.
+\begin{equation}
+\sum_{i=1}^{12}{12 \choose i}=4095
+\end{equation}
+\vspace{1in}
+\end{enumerate}
+
+%%%fourth problem
+\noindent\textbf{Exercise 1.2.5: } How many eight-character passwords are there if each character is either an uppercase letter A-Z, a lowercase letter a-z, or a digit 0-9 and where at least one character of each of the three types is used? \\
+
+\noindent \textbf{Answer:}
+For this problem want to use inclusion exclusion the same way we did before. First we count up the total possible passwords then subtract away the ones that don't meet the criteria. Since order matters and repetition is allowed this is the calculation,
+\begin{equation}
+(62^{8}-(36^{8}+36^{8}+52^{8}))+(26^{8}+26^{8}+10^{8})=159655911367680
+\end{equation}
+So here we see that the $62^{8}$ term is the total, and the $(36^{8}+36^{8}+52^{8})$ term counts the number of passwords that have two types of characters and it also counts the number of passwords that have one type of character twice. Since we are subtracting those passwords away twice we want to add them back in, which is why we add the $(26^{8}+26^{8}+10^{8})$ term.
+\vspace{1in}
+
+%%%fifth problem
+\noindent\textbf{Exercise 1.2.10: } How many permutations of $[n]$ are possible in which no even numbers and no odd numbers are adjacent?\\
+
+\noindent \textbf{Answer:}
+There exist two cases, one where $n$ is even, and the other where $n$ is odd.\\
+Suppose $n$ is even, if n is even there are exactly $\frac{n}{2}$ odd and even numbers. To count the total number of permutations all we have to do is permute the odd and even numbers, \\
+\begin{equation}
+2*(\frac{n}{2}!)*(\frac{n}{2}!)
+\end{equation}
+The$\frac{n}{2}!$ terms are there to permute the odd and even integers. The 2 term is there because there are two ways to order each permutation, odd even, and even odd.\\
+
+Suppose $n$ is odd then we do the same thing just with a slight alteration,
+\begin{equation}
+2*((\frac{n-1}{2}+1)!)*(\frac{n-1}{2}!)
+\end{equation}
+Here the same principle applies its just that there is one more even or odd term, hence the $\frac{n-1}{2}+1$
+\\
+
+
+
+\vspace{1in}
+
+%%%sixth problem
+\noindent\textbf{Exercise 1.2.16: } How many 4-permutations of $[10]$ have maximum element equal to 6? How many have maximum element at most 6?\\
+
+\noindent \textbf{Answer:}
+First, lets count how many 4-permutations of $[10]$ have maximum element equal to 6. To do this we must first count the number of ways we can insert 6 inter our length 4 permutation, $4\choose1$ then we want to permute the rest of the 3 slots with 5 possibilities, because 6 must be the max.
+\begin{equation}
+{{4} \choose {1}}*5*3*2=120
+\end{equation}
+\vspace{1in}\\
+To count how many 4-permutations of $[10]$ have maximum element at most 6, we can simply do,
+\begin{equation}
+6*5*4*3=360
+\end{equation}
+
+
+%%%7th problem
+\noindent\textbf{Exercise 1.2.18 (a and b): } Find the number of 5-card hands, dealt from a standard 52-card deck, that contain: \\\\
+
+\begin{enumerate}[(a)]
+\item a royal flush (A-K-Q-J-10 all in one suit)
+
+\noindent \textbf{Answer:}
+Since all the denomination are specific, and order doesn't matter there are only 4 different 5 card hands that are a royal flush. One for each suit.
+
+\vspace{1in}
+
+\item a straight flush (five cards of consecutive denominations all in one suit, but not a royal flush)\\\\
+\noindent \textbf{Answer:}
+First we choose the suit, so $4 \choose 1$. Then we want to count the number of ways we can have 5 cards with consecutive denominations. We can do this by actually counting them, (a,2,3,4,5),(2,3,4,5,6) ect. ect. There are 10 possible consecutive hands (NOTE: (A,2,3,4,5) and (10,J,Q,K,A) are counted). For each hand there are 4 suits so to count the total number of straight flushes possible we do,\\
+\begin{equation}
+{{4} \choose {1}}*10=40
+\end{equation} 
+\vspace{1in}
+\end{enumerate}
+
+%%% 8th problem
+\noindent\textbf{Exercise 1.3.1: } The less-than relation on [4] is the set
+$$R=\{(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)\}$$
+In other words, $(a,b) \in R$ if and only if $a < b$ It contains size ordered pairs. How many ordered pairs are in the less-than relation on $[n]$? How many are in the less-than-or-equal-to relation on $[n]$?\\\\
+
+\noindent \textbf{Answer:}
+ Since we are looking at a non empty set of positive integers we can use the well ordering principle to say that there is one such integer that is the least. For that one such integer the total number of relations it has is (n-1) because it is less than every other integer in the set. If we do the same thing for every we get that the total number of relations made is,
+\begin{equation}
+(n-1)!
+ \end{equation}
+  For the less than or equal relation, we can just take the total number of ordered pairs in the less than relation and then add $n$, since we are adding ordered pairs of the form $(a,a)$ such that $a\in[n]$. So the total number of pairs in the less than or equal relation is 
+ \begin{equation}
+ (n-1)!+n
+ \end{equatino}
+
+\vspace{1in}
+
+%%% 9th problem
+\noindent\textbf{Exercise 1.3.6: } Give a bijective proof: The number of $n$-digit binary numbers with exactly $k$ 1's equals the number of $k$-subsets of $[n]$. (This proves the other fact suggested by Figure 1.2 on page 25.)
+
+\noindent \textbf{Proof:}\\
+Let S = The number of $n$-digit binary numbers with exactly $k$ 1's\\
+Let K = The number of $k$-subsets of $[n]$\\
+$f: S \to K$\\
+Prove that $f$ is injective.\\
+Suppose $a,b \in S$ such that $f(a)=f(b)$. 
+I don't know how to start or setup or where to go from here.
+
+
+\qed
+
+
+
+
+
+\vspace{1in}
+
+%%% 10th problem
+\noindent\textbf{Exercise 1.3.7: } Prove Theorem1.3.7.\\
+
+If $f$ is a function, then the inverse relation $f^{-1}$ is a function if and only if $f$ is one-to-one.\\
+
+\noindent \textbf{Proof:} 
+
+Let $f$ be a function such that $f: A \to B$.\\ 
+Suppose $f^{-1}$ is a function such that $f^{-1}: B \to A$. If $f^{-1}$ is a function it must be true that every element in maps in $B$ maps to exactly on element in $A$. Since $f$ is a function that maps $A \to B$ it must follow that every element in $A$ maps to exactly one element in $B$. Thus $f$ in one-to-one.\\\\
+
+Suppose $f$ is one-to-one.  If $f$ is a one-to-one function then every element in $A$ maps to exactly one element in $B$. It must then follow that every element in $B$ maps to exactly one element in $A$. Since we don't have a single element in $B$ mapping to more than one element in $A$ we can say that $f^{-1}$ is a function.
+
+\qed
+
+\vspace{1in}
+
+%%% 11th problem
+%%% 10th problem
+\noindent\textbf{Exercise 1.3.10: } Suppose $A$ and $B$ are finite sets such that $|A|=|B|$ and that $f:A \to B$ is a function. Prove: $f$ is one-to-one if and only if $f$ is onto.
+\\
+
+\noindent \textbf{Proof:}\\
+(Forward): Suppose the function $f:A \to B$ is one-to-one, and that $|A|=|B|$. By the definition of one-to-one that each element from $A$ maps to exactly one element in $B$, this along with the fact that $|A|=|B|$ it must follow that every element in $B$ has an element mapped \textbf{onto(hehe!)} it.\\\\
+
+
+(Backwards): Suppose the function $f:A \to B$ is onto, and that $|A|=|B|$. By the definition of unto we can say that every element in $B$ has at least one element mapped onto it. Since we know that $f$ is a function we know that a single element in $A$ cant be mapped onto more that one element in $B$, this along with the fact that $|A|=|B|$ it must follow that every element in $B$ must map to an element in $A$.
+
+\qed
+
+
+
+
+
+
+\vspace{1in}
+\end{document}

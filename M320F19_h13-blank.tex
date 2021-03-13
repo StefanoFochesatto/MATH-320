@@ -1,0 +1,145 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz, calc}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+%% The next line says how the "vertex" style of nodes should look: drawn as small circles.
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=6pt]
+%%
+%% Next, we make a \vertex command as a shorthand in place of \node[vertex} to get that style.
+\newcommand{\vertex}{\node[vertex]}
+
+\linespread{1.1}
+
+%command for double parentheses
+\newcommand{\textmultiset}[2]{\bigl(\!{\binom{#1}{#2}}\!\bigr)}
+\newcommand{\displaymultiset}[2]{\left(\!{\binom{#1}{#2}}\!\right)}
+\newcommand\multiset[2]{\mathchoice{\displaymultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}}
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Combinatorics: Homework 13}
+\chead{\sc Stefano Fochesatto } 
+\rhead{\today}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+ 
+\begin{enumerate}
+%%%first problem
+\item (Problem 6.4.6) Determine the following generalized Ramsey numbers.\\
+	\begin{enumerate}
+	\item $R(K_3-e,K_b)$ for all $b \geq 3$\\
+	
+	\textbf{Answer:} 	
+	\vspace{1in}
+	
+	\item $R(K_{1,3},K_{1,4})$\\
+	
+	\textbf{Answer:} 
+	
+	\vspace{1in}
+	
+	\item $R(C_4,C_4)$\\
+	
+	\textbf{Answer:} 
+	
+	\vspace{1in}
+	
+	\item $R(K_3,C_4)$\\
+	
+	\textbf{Answer:} 
+	
+	\vspace{1in}
+	\end{enumerate}
+	
+\item (Problem 7.1.1 a,c) Suppose that you know three of the five parameters in a $(b,v,r,k, \lambda)$ design. In each case below, derive a formula for the remaining parameters.\\
+	
+	(a)  $b$, $v$ and $r$ known\\
+	
+	\textbf{Answer:} Using Theorem 7.1.1 we arrive at an answer with some simple algebra. Theorem 7.1.1 states that $bk = vr$ and $r(k - 1) = \lambda(v - 1)$. We can solve for $b$, $b = \frac{vr}{b}$ and then by substitution we can get $\lambda = \frac{r(\frac{vr}{b}) - 1}{v-1}$
+	
+	\vspace{1in}
+	
+	(c)  $r$, $k$, and $\lambda$ known\\
+	
+	\textbf{Answer:} Using the same theorem from the problem before we get that, $v = \frac{r(k - 1)}{\lambda}+1$ and $b = \frac{1}{k}(\frac{r(k - 1)}{\lambda}+1)r$
+	
+	\vspace{1in}
+	
+	
+\item (Problem 7.1.3) Let $n \geq 3$. Explain how to construct an $(n,n,n-1,n-1,n-2)$ design.\\
+
+	\textbf{Answer:} Since the number of blocks is $n$ and the size of each block is $n-1$ we know that each block in the design will be missing exactly one variety, therefore there is $n \choose (n-1)$ was to fill a block. Combinatorially this leads us now to consider the $n-1$ length subsets of $n$, in terms of its properties each $n-1$ length subset is the same as the blocks in the design. There are $n$ blocks and there is always exactly one variety missing from each. That leads to the property that each pairwise variety appears in $n-2$ blocks . Consider variety $a$ and $b$, there is one block that does contain $a$ and another, different block that doesn't contain $b$ so $a$ and $b$ must be in $n-1$ blocks. So we can construct a $(n,n,n-1,n-1,n-2)$ design by listing all the subsets size $n-1$.
+
+	\vspace{1in}
+
+\item (Problem 7.1.5) Let $V=[n]$ and let $\mathcal{B}$ consist of all the $k$-subsets of $V$, where $1 < k < n.$ Determine whether this is a BIBD. If it is, give its parameters.\\
+
+\textbf{Answer:} First lets solve for its parameters. We know that $v = n$, and by the definition of our design we know that the number of blocks is $b = n \choose k$, we also know that each block must contain $k$ varieties so $k = k$. From here we can proceed analytically or combinatorially, we will proceed analytically (because its cool). Consider Theorem 7.1.1 where we found that $bk = vr$, proceeding by substitution,
+\begin{align*}
+r &=\frac{bk}{v}\\
+  &=\frac{{n \choose k} k}{n}\\
+  &=\frac{n!}{(n-k)!k!} \frac{k}{n}\\
+  &=\frac{(n-1)!}{(n-k)!(k-1)!}\\
+  &= {n-1 \choose k-1}
+\end{align*}
+Now we want to solve for $\lambda$ we can choose again to proceed either analytically or combinatorially. For $\lambda$ we will proceed combinatorially. By definition $\lambda$ is the number of times a pairwise variety appears in a block. Since our block our defined as subsets all we have to do is set two arbitrary varieties aside and then count the number of ways to fill in the rest of the block by counting subsets size $k - 2$ from a set size $n - 2$, ie $\lambda = {n-2 \choose k-2}$. So the parameters for our design are $({n \choose k},n,{n-1 \choose k-1}, k ,{n-2 \choose k-2})$. Our design is a BIBD because $k < {n-1 \choose k-1}$.
+	\vspace{1in}
+
+\item (Problem 7.1.8) Let $\mathcal{D}$ be n incomplete design that is $k$-uniform and $\lambda$-balanced. Prove that $\mathcal{D}$ is regular. (Hint: Revisit the proof of Theorem 7.1.1)\\
+	\textbf{Proof:} My first instinct is to use to just use the Theorem 7.1.1, but the proof in the book assumes that $\mathcal{D}$ is regular. So what will take a similar approach but only assume what we are allowed and that is that $k$-uniform and $\lambda$-balanced but not that $r$-regular. To prove that $r(k - 1) = \lambda (v-1)$, now lets consider the number of 2-lists $(B,x)$ possible where $x,y \in B$ and $x \neq y$. There are two ways to count the two lists, by choosing $B$ first or choosing $x$ first. If we choose $B$ first, we know that there exists $r_y$ blocks that contain $y$ (note how we didn't say $r$ because we can't assume the design is $r$-regular) and then since the block contains $k - 1$ other varieties we know that there are $r_y(k-1)$.\\
+	Now we count the 2-lists by choosing $x$ first. So we know that there are $v - 1$ ways to choose an $x$ that is not equal to $y$. Then we count the number of ways that $x$ and $y$ appear pairwise, which is $\lambda$ blocks. So the total number of 2-lists is $\lambda(v - 1)$. Since we've counted the same thing two ways we know that $r_y(k-1) = \lambda(v - 1)$ through algebra we can see that $r_y = \frac{\lambda(v - 1)}{(k-1)}$ Since $r_y$ can be solved by terms that are constant, $r_y$ must be constant.
+	
+	\vspace{1in}
+
+\item (Problem A) Let $k\geq 2.$ Prove that if $\delta(G)=k,$ then $G$ contains a cycle on at least $k+1$ vertices. (Hint: Try a longest path argument.)\\\\
+
+	\textbf{Proof:} Suppose a longest path $L$ on graph $G$,\\ 
+\begin{equation*}
+\begin{tikzpicture}[scale=1]
+  \draw[thick, blue] (1,0) to (2,0);
+    \draw[thick, blue] (0,0) to (1,0);
+        \draw[thick, blue] (2,0) to (3,0);
+                \draw[thick, blue] (3,0) to (4,0);
+                                \draw[thick, blue] (5,0) to (6,0);
+                                                \draw[thick, blue] (6,0) to (7,0);
+\foreach \i in {1,2,...,5}{	
+	\vertex[fill=white] (\i) at (\i-1,0) [label=below:$\i$]{};
+	}
+	\vertex[fill=white] at (5,0) [label=below:$k$] {};
+		\vertex[fill=white] at (6,0) [label=below:$k+1$] {};
+			\vertex[fill=white] at (7,0) [label=below:$k+2$] {};
+			\vertex[fill=white] at (8,0) [label=below:$i$] {};
+			 \path (4,0) -- node[auto=false]{\ldots} (5,0);
+			  \path (7,0) -- node[auto=false]{\ldots} (8,0);
+
+	\draw
+\end{tikzpicture}
+\end{equation*}
+	
+	
+	also we know that the endpoint is vertex $x$ and it must have degree $d(x) \geq k$. Now let's consider the neighbors to $x$, we know that there must be at-least $k$ of them and they must all lie on the longest path $L$. We know if $x$ is a neighbor to any vertex in path $L$ that has index greater than or equal to $k+1$ then we are done and we know that graph $G$ contains a cycle on at least $k+1$ vertices. Suppose that $x$ is a neighbor to any vertex in path $L$ that has index less than or equal to $k$. By the PHP we have a contradiction because the total number of vertices that lie in path $L$ that have index less than or equal to $k$ is $k-1$ and we know that $x$ must have at least $k$ neighbors.
+	\vspace{1in}
+
+
+
+\end{enumerate}
+\end{document}

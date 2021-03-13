@@ -1,0 +1,199 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+\linespread{1.1}
+
+%command for double parentheses
+\newcommand{\textmultiset}[2]{\bigl(\!{\binom{#1}{#2}}\!\bigr)}
+\newcommand{\displaymultiset}[2]{\left(\!{\binom{#1}{#2}}\!\right)}
+\newcommand\multiset[2]{\mathchoice{\displaymultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}
+                                {\textmultiset{#1}{#2}}}
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Combinatorics: Homework 9}
+\chead{\sc Stefano Fochesatto} 
+\rhead{\today}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+
+3.6 \#1,2ad,4,8;                   6.1 \#3,6,7,10
+ 
+\begin{enumerate}
+%%%first problem
+\item (Problem 3.6.1) Find $a_{30}$ for the recurrence relation $a_0=-1,$ and $a_n=1-3a_{n-1}.$
+
+\textbf{Answer:} First we need to get this recurrence relation in a closed form. Note that $a_n=1-3a_{n-1}$ is a first order linear recurrence relation, therefore we can use the sweet formula from p.(135) of the textbook,
+\begin{equation*}
+a_n = a_0\alpha^n+\beta\frac{1-\alpha^n}{1-\alpha}.
+\end{equation*}
+Thus the solution to the given recurrence relation is,
+\begin{align*}
+a_n &= (-1)(-3)^n+\frac{1-(-3)^n}{1-(-3)}\\
+&= -(-3)^n+\frac{1-(-3)^n}{4}\\
+&= -(-3)^n-\frac{(-3)^n}{4}+\frac{1}{4}\\
+&= (-3)^n(-1-\frac{1}{4})+\frac{1}{4}\\
+&= (-\frac{5}{4})(-3)^n+\frac{1}{4}.
+\end{align*}
+And plugging in $n=30$ we get,
+\begin{equation*}
+a_{30} =  (-\frac{5}{4})(-3)^{30}+\frac{1}{4} = -257363915118311
+\end{equation*}
+\vspace{1in}
+
+\item (Problem 3.6.2.a) Solve the recurrence $a_0=3,$ $a_1=7,$ and $a_n=3a_{n-1}-2a_{n-2}$ for $n\geq 2.$\\
+\textbf{Answer:} Here we can take the same approach as we did for the last problem, because we can see that this recurrence relation is a second-order linear homogenous recurrence relation. Note that we have a case of distinct roots, because the characteristic equation that models this recurrence relation, is \begin{equation*}
+x^2-3x+2 = (x-2)(x-1)\\
+\end{equation*}
+Where $x = 2,1$. Therefore plugging into the formula all we need to do is solve the following system of equations for $A$ and $B$,
+\begin{align*}
+3 &= A2^{0}+B1^{0}\\
+7 &= A2^{1}+B1^{1}.
+\end{align*}
+Doing so we get that the closed form of the given recurrence relation is,
+\begin{equation*}
+a_n = 4(2)^{n}-1.
+\end{equation*}
+\vspace{1in}
+
+\item (Problem 3.6.2.d) Solve the recurrence $d_0=10,$  and $d_n=11d_{n-1}-10$ for $n\geq 1.$\\
+
+\textbf{Answer:} Here we can take the exact same approach as the first problem, because we have a first order linear recurrence relation. Recall,
+\begin{equation*}
+d_n = d_0\alpha^n+\beta\frac{1-\alpha^n}{1-\alpha}.
+\end{equation*}
+By substitution and some algebra,
+\begin{align*}
+d_n &= 10(11)^n+(-10)\frac{1-(11)^n}{1-(11)}\\
+&= 10(11)^n-10\frac{1-(11)^n}{-10}\\
+&= 10(11)^n+1-(11)^n\\
+&= 9(11)^n+1.
+\end{align*}
+Thus the closed form of the given recurrence relation is,
+\begin{equation*}
+d_n= 9(11)^n+1.
+\end{equation*}
+
+
+
+\vspace{1in}
+
+\item (Problem 3.6.4) Find a formula for the $n$th term  of the sequence defined by the recurrence relation $a_n=2a_{n-1}+3a_{n-2}$ for $n \geq 2,$ where $a_0=1$ and $a_1=2.$\\
+\textbf{Answer:} Again we can take the same approach we took for the second problem because we can see that the given recurrence is a second order linear homogenous recurrence relation. We can see what type of case we have by factoring the characteristic equation for the recurrence relation,
+\begin{align*}
+0&=x^2-2x-3\\
+& =(x+1)(x-3) 
+\end{align*}
+Since $x = -1, 3$ we have a case of distinct roots. So know all we have to do is solve the following system of equations and then 1 have a closed form of the recurrence relation,
+\begin{align*}
+1 &= A(-1)^{0}+B(3)^{0}\\
+2 &= A(-1)^{1}+B(3)^{1}.
+\end{align*}
+Doing so we get that, the closed form of the recurrence relation is, 
+\begin{equation*}
+a_n = \frac{1}{4}(-1)^{n}+\frac{3}{4}(3)^{n}.
+\end{equation*}
+
+
+\vspace{1in}
+
+
+\item (Problem 3.6.8) Find $\displaystyle{\lim_{\alpha \to 1} \frac{1-\alpha^2}{1-\alpha}}.$ Then, explain why this clarifies the relationship between the formulas for $a_n$ shown in Theorem 3.6.1. \\	 
+	 
+\textbf{Answer:} We can see that to evaluate the given limit it is necessary to recall L'Hospital's Rule. So we can see that by simply plugging in $\alpha = 1$ we get,
+\begin{equation*}
+ \frac{1-(1)^2}{1-(1)} = \frac{0}{0}
+\end{equation*}
+Since the limit evaluates to an indeterminate form we can use L'Hospital's Rule,
+\begin{equation*}
+\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}.
+\end{equation*}
+So,
+\begin{align*}
+\lim_{\alpha \to 1}  \frac{1-\alpha^2}{1-\alpha} &= \lim_{\alpha \to 1}  \frac{-2\alpha}{-1}\\
+&= 2 \text {  by plugging in $\alpha = 1$}
+\end{align*}
+Now consider Theorem 3.6.1 which provides a formula that gives a closed form to first order linear recurrence relations,
+\begin{equation*}
+a_n = \[ \begin{cases} 
+       a_0\alpha^n + \beta(\frac{1-\alpha^n}{1-\alpha}) & \alpha \neq 1 \\
+       a_0\alpha^n + \beta n& \alpha = 1
+   \end{cases}
+\]
+\end{equation*}
+Now we can see the connection between the limit calculated before and Theorem 3.6.1, consider the following,
+\begin{equation*}
+\lim_{\alpha \to 1}  \frac{1-\alpha^n}{1-\alpha} &= \lim_{\alpha \to 1}  \frac{-n\alpha}{-1} = n\\
+\end{equation*}
+So that's where the $\beta n$ term comes from.
+\vspace{1in}
+
+%\item (Problem 6.1.2) Let $G$ be the graph whose vertex set is the set of $2$-subsets of $[5].$ and where two vertices are adjacent of and only if their corresponding subsets are disjoint.\\
+%(a) Draw $G.$\\
+%
+%\noindent (b) Find, with proof, a graph mentioned in this section that is isomorphic to $G.$
+%
+%	\textbf{Answer:}\\
+%
+%	\vspace{1in}
+
+
+\item (Problem 6.1.3) Prove: If $G$ is a connected graph with $n$ vertices and $n-1$ edges where $n \geq 2,$ then $G$ has at least two vertices of degree 1.\\
+
+\textbf{Answer:} Proof by contradiction: Suppose that If $G$ is a connected graph with $n$ vertices and $n-1$ edges where $n \geq 2,$ then $G$ has at most one vertices of degree 1.\\
+\textbf{Case 1:} $G$ has 0 vertices degree one. By the handshaking lemma,
+\begin{align*}
+2e(G) &= \sum_{v\in V{G}} d(v)\\
+2n-2 &= \sum_{v : d(v) even} d(v) + \sum_{v : d(v) odd} d(v)
+\end{align*}
+
+	\vspace{1in}
+
+\item (Problem 6.1.6) Let $G=(V,E)$ be a graph. The \textbf{complement} of $G$ is that graph $\overline{G}=(V,E^C)$ where $E^C$ is the complement of $E$ relative to the edge set of $K_{n(G)}.$ In other words, for all $i,j \in V(G)$ we have $\{i,j\} \in E^C$ if and only if $\{i,j\} \not \in E.$\\
+
+Prove that if $G$ is isomorphic to $\overline{G}$ then either $n(G) \equiv 0 (\text{mod } 4)$ or $n(G) \equiv 1 (\text{mod } 4).$
+
+\textbf{Answer:}\\
+
+	\vspace{1in}
+	
+\item (Problem 6.1.7) Prove that if $\delta(G) \geq k,$ then $G$ contains a path of length at least $k.$
+
+\textbf{Answer:}\\
+
+	\vspace{1in}
+
+\item (Problem 6.1.10) Use graphs to give combinatorial proofs of the following results.\\
+(a) $\displaystyle{{n \choose 2} = {k \choose 2} + k(n-k) +{{n-k} \choose 2}}$
+
+\textbf{Answer:}\\
+
+	\vspace{1in}
+(b) Suppose $n_1,n_2,\cdots,n_k$ are positive integers. If $\sum_{i=1}^n n_i=n,$ then 
+$$\sum_{i=1}^n {n_i \choose 2} \leq {n \choose 2}.$$
+When does equality hold?\\
+
+\textbf{Answer:}\\
+
+
+\end{enumerate}
+\end{document}
